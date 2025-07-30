@@ -10,9 +10,10 @@ import Application from "./_components/Application";
 import Info from "./_components/Info";
 
 import { AnnouncementsList } from "@/app/_template_data/Announcements";
+import { auth } from "../api/auth/auth";
 
 const getData = async () => {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
 
   if (!session) {
     redirect("/api/auth/signin?callbackUrl=/dashboard");
@@ -30,7 +31,7 @@ const getData = async () => {
 };
 
 export default async function Dashboard() {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
   if (!session) {
     redirect("/api/auth/signin?callbackUrl=/dashboard");
   }
